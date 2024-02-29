@@ -132,16 +132,24 @@ def player_stats():
 # Flask route to end the current session
 @app.route('/end', methods=['GET'])
 def end():
-    global COMPLETE
-    COMPLETE = True
+    try:
+        global COMPLETE
+        COMPLETE = True
 
-    # Update the last statistic to mark as complete
-    latestStat = get_last_stat()
-    filter = {'ID': latestStat['ID']}
-    newvalues = {"$set": {"status": "complete"}}
+        # Update the last statistic to mark as complete
+        latestStat = get_last_stat()
+        filter = {'ID': latestStat['ID']}
+        newvalues = {"$set": {"status": "complete"}}
 
-    stats_db.update_one(filter, newvalues)
-    return jsonify({"Message": "Terminating, Function"})
+        stats_db.update_one(filter, newvalues)
+        return jsonify({
+            "Code": 200,
+            "Message": "Session successfully terminated."})
+    except:
+        return jsonify({
+            "Code": 500,
+            "Message": "Error ending session."})
+
 
 # Clean up GPIO resources
 GPIO.cleanup()

@@ -33,7 +33,7 @@ const WorkoutEnd = ({ navigation }: {navigation: any}) => {
               highestStreak: 0,
             }
             for (let j=0;j<data.length;j++) {
-              console.log(data[j]['date']);
+
               if (isInPastWeek(data[j]['date'])) {
                 weekData.shotsMade += data[j].shotsMade;
                 weekData.shotsTaken += data[j].shotsTaken;
