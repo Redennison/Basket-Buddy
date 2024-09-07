@@ -25,7 +25,7 @@ const WorkoutStart = ({ navigation }: {navigation: any}) => { //type check fix l
       fetchData();
     
       // Set up polling
-      const interval = setInterval(fetchData, 10000); // Polling every 10 seconds
+      const interval = setInterval(fetchData, 1000); // Pulling every second
     
       // Clear interval on component unmount
       return () => clearInterval(interval);
